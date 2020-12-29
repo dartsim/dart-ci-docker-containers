@@ -16,35 +16,42 @@ env:
   DOCKER_REPO: dartsim/dart-dev # https://hub.docker.com/repository/docker/dartsim/dart-dev
 
 jobs:
-  bionic-docs:
-    name: bionic-docs
+  # Ubuntu distros (xenial, bionic, focal, groovy, hirsute) on multiple architectures (amd64, arm64, ppc64le, s390x)
+  ubuntu-v6_10:
+    name: ubuntu-v6.10
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [xenial, bionic, focal, groovy, hirsute]
     env:
-      UBUNTU_VERSION: bionic
-      DART_VERSION: docs
+      UBUNTU_VERSION: ${{ matrix.distro }}
+      DART_VERSION: v6.10
     steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
+          file: ./${{ env.DART_VERSION }}/Dockerfile.ubuntu.${{ env.UBUNTU_VERSION }}
+          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           push: true
-          tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
+          tags: ${{ env.DOCKER_REPO }}:ubuntu-${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
+  # Xenial 32bit on i386
   xenial-32bit-v6_10:
     name: xenial-32bit-v6.10
     runs-on: ubuntu-latest
@@ -53,141 +60,86 @@ jobs:
       UBUNTU_VERSION: xenial
       DART_VERSION: v6.10
     steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            IMAGE_NAME=${{ env.IMAGE_NAME }}
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
+          file: ./${{ env.DART_VERSION }}/Dockerfile.ubuntu.xenial.32bit
           push: true
-          tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-32bit-${{ env.DART_VERSION }}
+          tags: ${{ env.DOCKER_REPO }}:ubuntu-${{ env.UBUNTU_VERSION }}-32bit-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-  xenial-v6_10:
-    name: xenial-v6.10
-    runs-on: ubuntu-latest
-    env:
-      UBUNTU_VERSION: xenial
-      DART_VERSION: v6.10
-    steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
-          push: true
-          tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-
-  bionic-v6_10:
-    name: bionic-v6.10
+  # Bionic image for API documentation builds
+  bionic-docs:
+    name: bionic-docs
     runs-on: ubuntu-latest
     env:
       UBUNTU_VERSION: bionic
-      DART_VERSION: v6.10
+      DART_VERSION: docs
     steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
           push: true
           tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-  focal-v6_10:
-    name: focal-v6.10
+  # Archlinux on amd64
+  archlinux-v6_10:
+    name: archlinux-v6.10
     runs-on: ubuntu-latest
     env:
-      UBUNTU_VERSION: focal
       DART_VERSION: v6.10
     steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
+          file: ./${{ env.DART_VERSION }}/Dockerfile.archlinux
           push: true
-          tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-
-  groovy-v6_10:
-    name: groovy-v6.10
-    runs-on: ubuntu-latest
-    env:
-      UBUNTU_VERSION: groovy
-      DART_VERSION: v6.10
-    steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile
-          build-args: |
-            UBUNTU_VERSION=${{ env.UBUNTU_VERSION }}
-            BASE_DIR=./${{ env.DART_VERSION }}
-          push: true
-          tags: ${{ env.DOCKER_REPO }}:${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
+          tags: ${{ env.DOCKER_REPO }}:archlinux-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

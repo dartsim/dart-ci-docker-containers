@@ -36,10 +36,6 @@ RUN apt-get install -y --no-install-recommends \
     libeigen3-dev \
     libfcl-dev
 
-# DART required dependencies for building API documentation of DART < 6.10
-RUN apt-get install -y --no-install-recommends \
-    libboost-regex-dev
-
 # ==============================================================================
 # DART optional dependencies
 # ==============================================================================
