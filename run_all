@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+./run -n ubuntu -t xenial --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le
+./run -n ubuntu -t bionic --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le
+./run -n ubuntu -t focal --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le
+./run -n ubuntu -t groovy --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le
+./run -n ubuntu -t hirsute --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le
+./run -n archlinux -t latest --platform linux/amd64
+
+# TODO: Add linux/riscv64
+
+# ./run -n ubuntu -t hirsute --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le --push
+# ./run -n ubuntu -t groovy --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le --push
+# ./run -n ubuntu -t focal --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le --push
+./run -n ubuntu -t bionic --platform linux/amd64,linux/arm64,linux/s390x,linux/ppc64le --push
+
+# ./run -n archlinux -t latest --platform linux/amd64 --push
+
+# ./run -n amazonlinux -t latest --platform linux/amd64,linux/arm64 --push

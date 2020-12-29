@@ -1,0 +1,58 @@
+FROM --platform=$TARGETPLATFORM archlinux:latest
+
+ARG NUM_CORES=1
+
+#===============================================================================
+# Install yay
+#===============================================================================
+RUN pacman -Syuq --noconfirm git base-devel sudo go
+RUN echo "Defaults        lecture = never" > /etc/sudoers.d/privacy \
+    && echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wheel \
+    && useradd -m -G wheel -s /bin/bash builder
+USER builder
+WORKDIR /home/builder
+RUN git clone https://aur.archlinux.org/yay.git --single-branch --depth 1 \
+    && cd yay \
+    && makepkg -si --noconfirm \
+    && cd .. \
+    && rm -rf .cache yay
+
+#===============================================================================
+# Build tools
+#===============================================================================
+RUN yay -Syu --needed --noconfirm \
+    clang \
+    cmake \
+    doxygen \
+    valgrind
+
+# ==============================================================================
+# DART required dependencies
+# ==============================================================================
+RUN yay -Syu --needed --noconfirm \
+    assimp boost eigen fcl freeglut libccd libgl
+
+# ==============================================================================
+# DART optional dependencies
+# ==============================================================================
+RUN yay -Syu --needed --noconfirm \
+    bullet \
+    coin-or-ipopt \
+    doxygen \
+    flann \
+    nlopt \
+    octomap \
+    ode \
+    openscenegraph \
+    pagmo \
+    tinyxml2 \
+    urdfdom
+
+# ==============================================================================
+# Python binding dependencies
+# ==============================================================================
+RUN yay -Syu --needed --noconfirm \
+    python3 \
+    pybind11
+
+USER root
