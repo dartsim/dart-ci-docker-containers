@@ -153,7 +153,7 @@ jobs:
         distro: [bionic, focal, groovy, hirsute]
     env:
       UBUNTU_VERSION: ${{ matrix.distro }}
-      DART_VERSION: v6.10
+      DART_VERSION: v8.0
     steps:
       # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
