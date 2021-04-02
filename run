@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+set -e
+
+help() {
+    echo "Build and upload dart-dev images."
+    echo
+    echo "Syntax: run [-h|a|p] [-n <name>]"
+    echo "options:"
+    echo "  -h | --help    Print this Help."
+    echo "  -a | --all     Build all the images."
+    echo "  -p | --push    Push the built images."
+    echo "  -n | --name    Ubuntu name to build (e.g. xenial, bionic, focal, groovy)."
+    echo "                 Ignored if -a is specified."
+    echo
+}
+
+image_name=jslee02/dart-dev
+dart_version=v8.0
+
+push_to_dockerhub=false
+base_image_name=NOT_DEFINED
+base_image_tag=latest
+build_all=false
+dockerfile_name=Dockerfile
+docker_build_args=""
+platform="linux/amd64"
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case $key in
+    -h | --help)
+        help
+        exit
+        ;;
+    -p | --push)
+        push_to_dockerhub=true
+        shift # past argument
+        ;;
+    -n | --base_image_name)
+        base_image_name="$2"
+        shift # past argument
+        shift # past value
+        ;;
+    -t | --base_image_tag)
+        base_image_tag="$2"
+        shift # past argument
+        shift # past value
+        ;;
+    -a | --platform)
+        platform="$2"
+        shift # past argument
+        shift # past value
+        ;;
+    *)                     # unknown option
+        POSITIONAL+=("$1") # save it in an array for later
+        shift              # past argument
+        ;;
+    esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+build() {
+    base_image_name=$1
+    base_image_tag=$2
+
+    if [[ $base_image_name == ubuntu ]]; then
+        docker_build_args="$docker_build_args --build-arg INSTALL_SCRIPT=install_deps_ubuntu.sh"
+        dockerfile_name=Dockerfile.$base_image_name.$base_image_tag
+    elif [[ $base_image_name == archlinux ]]; then
+        dockerfile_name=Dockerfile.archlinux
+    elif [[ $base_image_name == amazonlinux ]]; then
+        dockerfile_name=Dockerfile.amazonlinux
+    else
+        echo "Not supported"
+        exit 1
+    fi
+
+    echo "==================================================="
+    echo " Building $image_name:$base_image_name-$base_image_tag-$dart_version ($platform)..."
+    echo "==================================================="
+
+    # Use buildx: https://www.docker.com/blog/multi-arch-images/
+
+    if [ "$push_to_dockerhub" = "true" ]; then
+        docker_build_args="$docker_build_args --push"
+    fi
+
+    # https://github.com/tonistiigi/binfmt
+    docker run --privileged --rm tonistiigi/binfmt --install all
+
+    docker buildx build \
+        --platform $platform \
+        -f ./$dart_version/$dockerfile_name \
+        --build-arg BASE_IMAGE=$base_image_name:$base_image_tag \
+        --build-arg BASE_DIR=./$dart_version \
+        $docker_build_args \
+        -t $image_name:$base_image_name-$base_image_tag-$dart_version \
+        .
+
+    docker buildx imagetools inspect $image_name:$base_image_name-$base_image_tag-$dart_version
+
+    echo "Done"
+    echo ""
+}
+
+build $base_image_name $base_image_tag
