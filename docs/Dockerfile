@@ -90,7 +90,7 @@ RUN apt-get install -y --no-install-recommends \
     python3-pip \
     python3-setuptools
 
-RUN git clone https://github.com/pybind/pybind11 -b 'v2.6.1' --single-branch --depth 1 \
+RUN git clone https://github.com/pybind/pybind11 -b 'v2.6.2' --single-branch --depth 1 \
     && mkdir -p pybind11/build \
     && pushd pybind11/build \
     && cmake .. -DCMAKE_BUILD_TYPE=Release -DPYBIND11_TEST=OFF \
