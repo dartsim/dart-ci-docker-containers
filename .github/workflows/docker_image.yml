@@ -56,7 +56,6 @@ jobs:
     name: xenial-32bit-v6.10
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: i386/ubuntu
       UBUNTU_VERSION: xenial
       DART_VERSION: v6.10
     steps:
