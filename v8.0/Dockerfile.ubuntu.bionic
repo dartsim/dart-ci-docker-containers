@@ -54,7 +54,8 @@ RUN git clone git://github.com/gabime/spdlog.git -b 'v1.5.0' --single-branch --d
 # ==============================================================================
 # Optional dependencies
 # ==============================================================================
-# No optional dependencies yet
+RUN apt-get install -qq -y --no-install-recommends \
+    libcereal-dev
 
 # ==============================================================================
 # Python binding dependencies

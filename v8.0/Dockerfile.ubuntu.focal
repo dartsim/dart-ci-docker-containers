@@ -40,7 +40,8 @@ RUN apt-get install -qq -y --no-install-recommends libspdlog-dev
 # ==============================================================================
 # Optional dependencies
 # ==============================================================================
-# No optional dependencies yet
+RUN apt-get install -qq -y --no-install-recommends \
+    libcereal-dev
 
 # ==============================================================================
 # Python binding dependencies

@@ -56,7 +56,8 @@ RUN git clone git://github.com/gabime/spdlog.git -b 'v1.5.0' --single-branch --d
 #===============================================================================
 # Optional dependencies
 #===============================================================================
-# No optional dependencies yet
+RUN yay -Syu --needed --noconfirm \
+  cereal
 
 # ==============================================================================
 # Python binding dependencies
