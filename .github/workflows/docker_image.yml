@@ -29,6 +29,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
+        id: qemu
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
@@ -69,6 +70,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/docker-setup-qemu
       - name: Set up QEMU
+        id: qemu
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
