@@ -64,7 +64,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \
     libboost-serialization-dev \
     libtbb-dev
-RUN git clone https://github.com/esa/pagmo2.git -b 'v2.16.1' --single-branch --depth 1 \
+RUN git clone https://github.com/esa/pagmo2.git -b 'v2.17.0' --single-branch --depth 1 \
     && mkdir pagmo2/build \
     && pushd pagmo2/build \
     && cmake .. \
