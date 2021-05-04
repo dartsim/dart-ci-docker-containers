@@ -144,13 +144,79 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-  # Ubuntu distros (bionic, focal, groovy, hirsute) on multiple architectures (amd64, arm64, ppc64le, s390x)
+
+  # Ubuntu distros (bionic, focal, hirsute) on multiple architectures (amd64, arm64, ppc64le, s390x)
+  ubuntu-v7_0:
+    name: ubuntu-v7.0
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [bionic, focal, hirsute]
+    env:
+      UBUNTU_VERSION: ${{ matrix.distro }}
+      DART_VERSION: v7.0
+    steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          file: ./${{ env.DART_VERSION }}/Dockerfile.ubuntu.${{ env.UBUNTU_VERSION }}
+          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+          push: true
+          tags: ${{ env.DOCKER_REPO }}:ubuntu-${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+  # Archlinux on amd64
+  archlinux-v7_0:
+    name: archlinux-v7.0
+    runs-on: ubuntu-latest
+    env:
+      DART_VERSION: v7.0
+    steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      # https://github.com/marketplace/actions/docker-setup-buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      # https://github.com/marketplace/actions/docker-login
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          file: ./${{ env.DART_VERSION }}/Dockerfile.archlinux
+          push: true
+          tags: ${{ env.DOCKER_REPO }}:archlinux-${{ env.DART_VERSION }}
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }} 
+
+  # Ubuntu distros (bionic, focal, hirsute) on multiple architectures (amd64, arm64, ppc64le, s390x)
   ubuntu-v8_0:
     name: ubuntu-v8.0
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distro: [bionic, focal, groovy, hirsute]
+        distro: [bionic, focal, hirsute]
     env:
       UBUNTU_VERSION: ${{ matrix.distro }}
       DART_VERSION: v8.0
