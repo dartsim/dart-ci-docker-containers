@@ -24,9 +24,9 @@ jobs:
       matrix:
         distro: [bionic, focal, hirsute]
         dart_version: [v6.10, v7.0, v8.0]
-      include:
-        - distro: xenial
-          dart_version: v6.10
+        include:
+          - distro: xenial
+            dart_version: v6.10
     env:
       UBUNTU_VERSION: ${{ matrix.distro }}
       DART_VERSION: ${{ matrix.dart_version }}
