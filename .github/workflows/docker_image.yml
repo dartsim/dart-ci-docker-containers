@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: ["**"]
   schedule:
-    # Run at 02:00 UTC every day
+    # Run at 02:00 UTC every Friday
     # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events
     - cron: "0 2 * * FRI"
 
