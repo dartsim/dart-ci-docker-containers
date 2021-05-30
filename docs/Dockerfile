@@ -65,7 +65,6 @@ RUN apt-get install -y --no-install-recommends \
     coinor-libipopt-dev \
     libboost-serialization-dev \
     libeigen3-dev \
-    libnlopt-dev \
     libtbb-dev
 RUN git clone https://github.com/esa/pagmo2.git -b 'v2.17.0' --single-branch --depth 1 \
     && mkdir pagmo2/build \
@@ -73,7 +72,7 @@ RUN git clone https://github.com/esa/pagmo2.git -b 'v2.17.0' --single-branch --d
     && cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DPAGMO_WITH_EIGEN3=ON \
-    -DPAGMO_WITH_NLOPT=ON \
+    -DPAGMO_WITH_NLOPT=OFF \
     -DPAGMO_WITH_IPOPT=ON \
     -DPAGMO_BUILD_TESTS=OFF \
     -DPAGMO_BUILD_BENCHMARKS=OFF \
