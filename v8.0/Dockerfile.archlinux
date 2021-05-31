@@ -62,10 +62,13 @@ RUN yay -Syu --needed --noconfirm \
 # ==============================================================================
 # Python binding dependencies
 # ==============================================================================
-
 RUN yay -Syu --needed --noconfirm \
-  python3 \
-  python-pytest \
-  pybind11
+    python3 \
+    python-pip \
+    pybind11
+
+RUN pip install \
+    numpy \
+    pytest
 
 USER root
