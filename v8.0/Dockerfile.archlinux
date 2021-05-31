@@ -64,11 +64,8 @@ RUN yay -Syu --needed --noconfirm \
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
     python3 \
-    python-pip \
+    python-numpy \
+    python-pytest \
     pybind11
-
-RUN pip install \
-    numpy \
-    pytest
 
 USER root
