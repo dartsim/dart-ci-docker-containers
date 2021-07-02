@@ -9,7 +9,7 @@ help() {
     echo "  -h | --help    Print this Help."
     echo "  -a | --all     Build all the images."
     echo "  -p | --push    Push the built images."
-    echo "  -n | --name    Ubuntu name to build (e.g. xenial, bionic, focal, groovy)."
+    echo "  -n | --name    Ubuntu name to build (e.g. xenial, bionic, focal)."
     echo "                 Ignored if -a is specified."
     echo
 }
