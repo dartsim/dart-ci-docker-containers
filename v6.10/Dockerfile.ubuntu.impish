@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM ubuntu:hirsute
+FROM --platform=$TARGETPLATFORM ubuntu:impish
 
 ARG DEBIAN_FRONTEND=noninteractive
 
