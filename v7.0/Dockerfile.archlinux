@@ -43,11 +43,13 @@ RUN yay -Syu --needed --noconfirm \
     coin-or-ipopt \
     doxygen \
     flann \
+    fmt \
     nlopt \
     octomap \
     ode \
     openscenegraph \
     pagmo \
+    spdlog \
     tinyxml2 \
     urdfdom
 

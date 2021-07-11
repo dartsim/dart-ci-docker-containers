@@ -55,7 +55,9 @@ RUN apt-get install -y --no-install-recommends \
     libnlopt-cxx-dev \
     liboctomap-dev \
     libode-dev \
-    libimgui-dev
+    libimgui-dev \
+    libspdlog-dev \
+    libfmt-dev
 
 # pagmo2
 RUN apt-get install -y --no-install-recommends \
