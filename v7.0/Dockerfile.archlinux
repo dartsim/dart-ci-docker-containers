@@ -42,7 +42,6 @@ RUN yay -Syu --needed --noconfirm \
     bullet \
     coin-or-ipopt \
     doxygen \
-    flann \
     fmt \
     nlopt \
     octomap \
