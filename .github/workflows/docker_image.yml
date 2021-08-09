@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [bionic, focal, hirsute, impish]
-        dart_version: [v6.12, v7.0]
+        dart_version: [v6.12, v7.0, v7.0-minimal]
         include:
           - distro: xenial
             dart_version: v6.12
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dart_version: [v7.0]
+        dart_version: [v7.0, v7.0-minimal]
     env:
       DART_VERSION: ${{ matrix.dart_version }}
     steps:

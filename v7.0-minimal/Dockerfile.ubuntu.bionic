@@ -1,0 +1,39 @@
+FROM --platform=$TARGETPLATFORM ubuntu:bionic
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Use /bin/bash to use pushd/popd
+SHELL ["/bin/bash", "-c"]
+
+# Update apt-get
+RUN apt-get update -qq
+
+# ==============================================================================
+# Build tools
+# ==============================================================================
+RUN apt-get install -y --no-install-recommends \
+    build-essential \
+    clang \
+    cmake \
+    curl \
+    git \
+    lcov \
+    lsb-release \
+    pkg-config \
+    software-properties-common
+
+# ==============================================================================
+# DART required dependencies
+# ==============================================================================
+RUN apt-get install -y --no-install-recommends \
+    libassimp-dev \
+    libccd-dev \
+    libeigen3-dev \
+    libfcl-dev \
+    libfmt-dev
+
+# ==============================================================================
+# Clean up
+# ==============================================================================
+
+RUN rm -rf /var/lib/apt/lists/*

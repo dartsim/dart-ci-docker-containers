@@ -30,11 +30,10 @@ RUN apt-get install -y --no-install-recommends \
 # ==============================================================================
 RUN apt-get install -y --no-install-recommends \
     libassimp-dev \
-    libboost-filesystem-dev \
-    libboost-system-dev \
     libccd-dev \
     libeigen3-dev \
-    libfcl-dev
+    libfcl-dev \
+    libfmt-dev
 
 # ==============================================================================
 # DART optional dependencies
@@ -52,8 +51,7 @@ RUN apt-get install -y --no-install-recommends \
     libnlopt-dev \
     liboctomap-dev \
     libode-dev \
-    libspdlog-dev \
-    libfmt-dev
+    libspdlog-dev    
 
 # pagmo2
 RUN apt-get install -y --no-install-recommends \

@@ -33,32 +33,6 @@ RUN yay -Syu --needed --noconfirm \
 # DART required dependencies
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
-    assimp eigen fcl libccd libgl
-
-# ==============================================================================
-# DART optional dependencies
-# ==============================================================================
-RUN yay -Syu --needed --noconfirm \
-    bullet \
-    coin-or-ipopt \
-    doxygen \
-    fmt \
-    nlopt \
-    octomap \
-    ode \
-    openscenegraph \
-    pagmo \
-    spdlog \
-    tinyxml2 \
-    urdfdom
-
-# ==============================================================================
-# Python binding dependencies
-# ==============================================================================
-RUN yay -Syu --needed --noconfirm \
-    python3 \
-    python-numpy \
-    python-pytest \
-    pybind11
+    assimp eigen fcl fmt libccd
 
 USER root
