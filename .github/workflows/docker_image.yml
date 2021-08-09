@@ -123,6 +123,7 @@ jobs:
     name: archlinux
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         dart_version: [v7.0, v7.0-minimal]
     env:
