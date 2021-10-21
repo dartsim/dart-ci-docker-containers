@@ -100,8 +100,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dart_version: [v7.0, v7.0-min]
+        distro: [archlinux, archlinux-min]
+        dart_version: [v7.0]
     env:
+      OS_VERSION: ${{ matrix.distro }}
       DART_VERSION: ${{ matrix.dart_version }}
     steps:
       # https://github.com/marketplace/actions/docker-setup-qemu
@@ -121,8 +123,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          file: ./${{ env.DART_VERSION }}/Dockerfile.archlinux
+          file: ./${{ env.DART_VERSION }}/Dockerfile.${{ env.OS_VERSION }}
           push: true
-          tags: ${{ env.DOCKER_REPO }}:archlinux-${{ env.DART_VERSION }}
+          tags: ${{ env.DOCKER_REPO }}:${{ env.OS_VERSION }}-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
