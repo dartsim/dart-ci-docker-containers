@@ -51,8 +51,7 @@ RUN apt-get install -y --no-install-recommends \
     libopenscenegraph-dev \
     libnlopt-cxx-dev \
     liboctomap-dev \
-    libode-dev \
-    libspdlog-dev
+    libode-dev
 
 # pagmo2
 RUN apt-get install -y --no-install-recommends \

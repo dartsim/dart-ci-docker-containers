@@ -31,7 +31,9 @@ RUN apt-get install -y --no-install-recommends \
     libeigen3-dev \
     libfcl-dev \
     libfmt-dev \
-    libglew-dev
+    libglew-dev \
+    libglfw3-dev \
+    libspdlog-dev
 
 # ==============================================================================
 # Clean up

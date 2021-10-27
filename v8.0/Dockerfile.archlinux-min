@@ -33,6 +33,6 @@ RUN yay -Syu --needed --noconfirm \
 # DART required dependencies
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
-    assimp eigen fcl fmt glew libccd
+    assimp eigen fcl fmt glew glfw libccd
 
 USER root
