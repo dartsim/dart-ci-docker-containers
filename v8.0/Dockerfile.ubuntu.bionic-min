@@ -20,7 +20,10 @@ RUN apt-get install -y --no-install-recommends \
     lcov \
     lsb-release \
     pkg-config \
-    software-properties-common
+    software-properties-common \
+    clang-format-9 \
+    doxygen \
+    valgrind
 
 # ==============================================================================
 # DART required dependencies
