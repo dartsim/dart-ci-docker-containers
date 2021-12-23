@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM ubuntu:impish
+FROM --platform=$TARGETPLATFORM ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -14,6 +14,8 @@ RUN apt-get update -qq
 RUN apt-get install -y --no-install-recommends \
     build-essential \
     clang \
+    clang-format-6.0 \
+    clang-format-9 \
     cmake \
     curl \
     doxygen \
@@ -54,7 +56,7 @@ RUN apt-get install -y --no-install-recommends \
     libnlopt-cxx-dev \
     liboctomap-dev \
     libode-dev \
-    libimgui-dev
+    libspdlog-dev
 
 # pagmo2
 RUN apt-get install -y --no-install-recommends \
