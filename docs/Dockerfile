@@ -35,7 +35,8 @@ RUN apt-get install -y --no-install-recommends \
     libboost-system-dev \
     libccd-dev \
     libeigen3-dev \
-    libfcl-dev
+    libfcl-dev \
+    libfmt-dev
 
 # DART required dependencies for building API documentation of DART < 6.10
 RUN apt-get install -y --no-install-recommends \
