@@ -23,14 +23,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [bionic, focal, impish, jammy]
+        distro: [bionic, focal, jammy]
         dart_version: [v6.13, v8.0]
         include:
           - distro: bionic-min
             dart_version: v8.0
           - distro: focal-min
-            dart_version: v8.0
-          - distro: impish-min
             dart_version: v8.0
           - distro: jammy-min
             dart_version: v8.0
