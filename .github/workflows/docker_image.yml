@@ -30,6 +30,10 @@ jobs:
             dart_version: v8.0
           - distro: jammy-min
             dart_version: v8.0
+          - distro: kinetic
+            dart_version: v8.0
+          - distro: kinetic-min
+            dart_version: v8.0
     env:
       UBUNTU_VERSION: ${{ matrix.distro }}
       DART_VERSION: ${{ matrix.dart_version }}
