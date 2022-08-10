@@ -56,8 +56,8 @@ RUN yay -Syu --needed --noconfirm \
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
     python3 \
-    python-numpy \
-    python-pytest \
+    python3-numpy \
+    python3-pytest \
     pybind11
 
 USER root
