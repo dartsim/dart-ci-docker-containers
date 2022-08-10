@@ -48,7 +48,8 @@ RUN yay -Syu --needed --noconfirm \
     pagmo \
     spdlog \
     tinyxml2 \
-    urdfdom
+    urdfdom \
+    imgui
 
 # ==============================================================================
 # Python binding dependencies
