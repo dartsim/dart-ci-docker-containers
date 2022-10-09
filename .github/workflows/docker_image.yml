@@ -30,6 +30,8 @@ jobs:
             dart_version: v8.0
           - distro: jammy-min
             dart_version: v8.0
+          - distro: jammy-cuda
+            dart_version: v8.0
           - distro: kinetic
             dart_version: v8.0
           - distro: kinetic-min
