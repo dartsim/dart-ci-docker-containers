@@ -25,17 +25,23 @@ jobs:
       matrix:
         distro: [bionic, focal, jammy]
         dart_version: [v6.13]
+        platforms: ["linux/amd64,linux/arm64,linux/ppc64le,linux/s390x"]
         include:
           - distro: jammy
             dart_version: v8.0
+            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           - distro: jammy-min
             dart_version: v8.0
+            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           - distro: jammy-cuda
             dart_version: v8.0
+            platforms: linux/amd64,linux/arm64
           - distro: kinetic
             dart_version: v8.0
+            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           - distro: kinetic-min
             dart_version: v8.0
+            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
     env:
       UBUNTU_VERSION: ${{ matrix.distro }}
       DART_VERSION: ${{ matrix.dart_version }}
@@ -58,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: ./${{ env.DART_VERSION }}/Dockerfile.ubuntu.${{ env.UBUNTU_VERSION }}
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+          platforms: ${{ matrix.platforms }}
           push: true
           tags: ${{ env.DOCKER_REPO }}:ubuntu-${{ env.UBUNTU_VERSION }}-${{ env.DART_VERSION }}
       - name: Image digest
