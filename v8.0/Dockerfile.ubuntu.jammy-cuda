@@ -32,7 +32,7 @@ RUN apt-get install -y --no-install-recommends \
     && add-apt-repository "deb ${REPO_URL} /"
 
 RUN apt-get install -y --no-install-recommends \
-    cuda
+    nvidia-cuda-toolkit
 
 # ==============================================================================
 # Clean up
