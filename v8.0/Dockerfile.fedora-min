@@ -1,5 +1,7 @@
 FROM --platform=$TARGETPLATFORM fedora:latest
 
+RUN dnf makecache -y --refresh
+
 #===============================================================================
 # Build tools
 #===============================================================================
@@ -13,10 +15,10 @@ RUN dnf install -y \
 # DART required dependencies
 # ==============================================================================
 RUN dnf install -y \
-    assimp \
-    eigen3 \
-    fcl \
-    fmt \
-    glew \
-    glfw \
-    libccd
+    assimp-devel \
+    eigen3-devel \
+    fcl-devel \
+    fmt-devel \
+    glew-devel \
+    glfw-devel \
+    libccd-devel
