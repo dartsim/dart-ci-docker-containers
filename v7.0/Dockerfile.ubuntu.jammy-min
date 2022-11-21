@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM ubuntu:focal
+FROM --platform=$TARGETPLATFORM ubuntu:jammy
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -14,10 +14,11 @@ RUN apt-get update -qq
 RUN apt-get install -y --no-install-recommends \
     build-essential \
     clang \
-    clang-format-9 \
+    clang-format-14 \
     cmake \
     curl \
     doxygen \
+    gcovr \
     git \
     lcov \
     lsb-release \
