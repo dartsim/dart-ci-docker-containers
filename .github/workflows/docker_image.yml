@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [bionic, focal, jammy]
+        distro: [focal, jammy]
         dart_version: [v6.13]
         platforms: ["linux/amd64,linux/arm64,linux/ppc64le,linux/s390x"]
         build_min: [OFF]
