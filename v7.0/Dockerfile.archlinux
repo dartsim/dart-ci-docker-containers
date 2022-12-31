@@ -41,6 +41,7 @@ RUN yay -Syu --needed --noconfirm \
 RUN yay -Syu --needed --noconfirm \
     bullet \
     coin-or-ipopt \
+    freeglut \
     nlopt \
     octomap \
     ode \
