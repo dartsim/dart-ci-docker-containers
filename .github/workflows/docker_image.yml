@@ -32,6 +32,10 @@ jobs:
             build_min: ON
             dart_version: v7.0
             platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+          - distro: kinetic
+            build_min: ON
+            dart_version: v7.0
+            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           - distro: jammy
             build_min: ON
             dart_version: v8.0
