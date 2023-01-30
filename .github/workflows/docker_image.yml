@@ -211,3 +211,53 @@ jobs:
           tags: ${{ env.DOCKER_REPO }}:${{ env.OS_VERSION }}-${{ env.DART_VERSION }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+  # Manylinux
+  manylinux:
+    name: manylinux
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [manylinux_2_28]
+        postfix: [_x86_64]
+        platforms: ["linux/amd64"]
+        dart_version: [v7.0]
+        include:
+          - distro: manylinux_2_28
+            postfix: _aarch64
+            platforms: "linux/arm64"
+            dart_version: v7.0
+          - distro: manylinux_2_28
+            postfix: _ppc64le
+            platforms: "linux/ppc64le"
+            dart_version: v7.0
+          - distro: manylinux_2_28
+            postfix: _s390x
+            platforms: "linux/s390x"
+            dart_version: v7.0
+    steps:
+      # https://github.com/marketplace/actions/docker-setup-qemu
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      # https://github.com/marketplace/actions/docker-setup-buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      # https://github.com/marketplace/actions/docker-login
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      # https://github.com/marketplace/actions/build-and-push-docker-images
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          file: ./${{ matrix.dart_version }}/Dockerfile.${{ matrix.distro }}
+          platforms: ${{ matrix.platforms }}
+          build-args: BASE_IMAGE=quay.io/pypa/manylinux_2_28${{ matrix.postfix }}
+          push: true
+          tags: ${{ env.DOCKER_REPO }}:${{ matrix.distro }}${{ matrix.postfix }}-${{ matrix.dart_version }}
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

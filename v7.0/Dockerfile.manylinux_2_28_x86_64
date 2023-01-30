@@ -1,0 +1,18 @@
+ARG BASE_IMAGE=quay.io/pypa/manylinux_2_28_x86_64
+FROM $BASE_IMAGE
+
+# Install Homebrew on Linux and follow-ups
+RUN yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+RUN yum groupinstall -y 'Development Tools'
+RUN brew install gcc
+
+# Build dependencies
+RUN brew install cmake pkg-config
+
+# DART dependencies
+RUN brew install assimp bullet eigen fcl fmt flann ipopt libccd nlopt octomap ode pagmo spdlog tinyxml2 urdfdom yaml-cpp
+RUN brew install open-scene-graph --HEAD
+
+# dartpy dependencies
+RUN brew python3 pybind11
