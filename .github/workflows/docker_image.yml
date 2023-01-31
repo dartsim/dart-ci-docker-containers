@@ -221,16 +221,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [Dockerfile.manylinux_2_28.brew]
-        base_image: [quay.io/pypa/manylinux_2_28_x86_64]
-        image: [manylinux_2_28_x86_64]
+        dockerfile: [Dockerfile.manylinux2014_x86_64]
+        base_image: [quay.io/pypa/manylinux2014_x86_64]
+        image: [manylinux2014_x86_64]
         platforms: ["linux/amd64"]
         dart_version: [v7.0]
         include:
-          - dockerfile: Dockerfile.manylinux2014_x86_64
-            base_image: quay.io/pypa/manylinux2014_x86_64
-            image: manylinux2014_x86_64
-            platforms: "linux/amd64"
+          - dockerfile: Dockerfile.manylinux2014_aarch64
+            base_image: quay.io/pypa/manylinux2014_aarch64
+            image: manylinux2014_aarch64
+            platforms: "linux/arm64"
             dart_version: v7.0
 
           - dockerfile: Dockerfile.manylinux2014_ppc64le
@@ -243,6 +243,12 @@ jobs:
             base_image: quay.io/pypa/manylinux2014_s390x
             image: manylinux2014_s390x
             platforms: "linux/s390x"
+            dart_version: v7.0
+
+          - dockerfile: Dockerfile.manylinux_2_28.brew
+            base_image: quay.io/pypa/manylinux_2_28_x86_64
+            image: manylinux_2_28_x86_64
+            platforms: "linux/amd64"
             dart_version: v7.0
 
           - dockerfile: Dockerfile.manylinux_2_28
