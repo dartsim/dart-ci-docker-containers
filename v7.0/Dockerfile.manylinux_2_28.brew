@@ -23,6 +23,6 @@ RUN brew install assimp bullet eigen fcl fmt flann ipopt libccd nlopt octomap od
 RUN brew install open-scene-graph --HEAD
 
 # dartpy dependencies
-RUN brew python3 pybind11
+RUN brew install python3 pybind11
 
 USER root
