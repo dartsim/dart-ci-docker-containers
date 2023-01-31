@@ -19,7 +19,7 @@ RUN brew install gcc
 RUN brew install cmake pkg-config
 
 # DART dependencies
-RUN brew install assimp bullet eigen fcl fmt flann ipopt libccd nlopt octomap ode pagmo spdlog tinyxml2 urdfdom yaml-cpp
+RUN brew install assimp bullet eigen fcl fmt flann freeglut ipopt libccd nlopt octomap ode pagmo spdlog tinyxml2 urdfdom yaml-cpp
 RUN brew install open-scene-graph --HEAD
 
 # dartpy dependencies
