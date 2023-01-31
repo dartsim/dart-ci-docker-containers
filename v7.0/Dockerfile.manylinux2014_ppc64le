@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=quay.io/pypa/manylinux2014_ppc64le
 FROM $BASE_IMAGE
 
-RUN yum install -y glew-devel boost-devel coin-or-Ipopt-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
+RUN yum install -y glew-devel boost-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
 
 # Missing optional dependencies:
 #   bullet
