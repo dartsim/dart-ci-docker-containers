@@ -1,11 +1,13 @@
-ARG BASE_IMAGE=quay.io/pypa/manylinux2014_x86_64
+ARG BASE_IMAGE=quay.io/pypa/manylinux2014_aarch64
 FROM $BASE_IMAGE
-
-RUN yum install -y glew-devel boost-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
 
 # Missing optional dependencies:
 #   bullet
 #   ipopt
+#   nlopt
+#   spdlog
+
+RUN yum install -y glew-devel boost-devel python3-devel
 
 # fmt
 RUN git clone https://github.com/fmtlib/fmt.git -b 9.1.0 \
@@ -57,11 +59,11 @@ RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
 #     && make install \
 #     && cd .. \
 #     && rm -rf tinyxml
-# RUN git clone https://github.com/xbmc/TinyXML.git \
-#     && mkdir -p TinyXML/build \
-#     && cmake TinyXML -B TinyXML/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build TinyXML/build --target install -j \
-#     && rm -rf TinyXML
+RUN git clone https://github.com/jslee02/tinyxml.git \
+    && mkdir -p tinyxml/build \
+    && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build tinyxml/build --target install -j \
+    && rm -rf tinyxml
 
 # tinyxml2
 RUN git clone https://github.com/leethomason/tinyxml2.git -b '9.0.0' \
