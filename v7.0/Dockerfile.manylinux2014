@@ -1,15 +1,14 @@
 ARG BASE_IMAGE=quay.io/pypa/manylinux2014_x86_64
 FROM $BASE_IMAGE
 
-# RUN yum install -y boost-devel eigen3-devel glew-devel python3-devel
-RUN yum install -y fmt-devel glew-devel glfw-devel libccd-devel boost-devel bullet-devel coin-or-Ipopt-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
+RUN yum install -y glew-devel glfw-devel libccd-devel boost-devel bullet-devel coin-or-Ipopt-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
 
-# # fmt
-# RUN git clone https://github.com/fmtlib/fmt.git -b 9.1.0 \
-#     && mkdir -p fmt/build \
-#     && cmake fmt -B fmt/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build fmt/build --target install -j \
-#     && rm -rf fmt
+# fmt
+RUN git clone https://github.com/fmtlib/fmt.git -b 9.1.0 \
+    && mkdir -p fmt/build \
+    && cmake fmt -B fmt/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build fmt/build --target install -j \
+    && rm -rf fmt
 
 # assimp
 RUN git clone https://github.com/assimp/assimp.git -b 'v5.2.5' \
