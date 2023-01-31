@@ -227,19 +227,19 @@ jobs:
         platforms: ["linux/amd64"]
         dart_version: [v7.0]
         include:
-          - dockerfile: Dockerfile.manylinux2014
+          - dockerfile: Dockerfile.manylinux2014_x86_64
             base_image: quay.io/pypa/manylinux2014_x86_64
             image: manylinux2014_x86_64
             platforms: "linux/amd64"
             dart_version: v7.0
 
-          - dockerfile: Dockerfile.manylinux2014
+          - dockerfile: Dockerfile.manylinux2014_ppc64le
             base_image: quay.io/pypa/manylinux2014_ppc64le
             image: manylinux2014_ppc64le
             platforms: "linux/ppc64le"
             dart_version: v7.0
 
-          - dockerfile: Dockerfile.manylinux2014
+          - dockerfile: Dockerfile.manylinux2014_s390x
             base_image: quay.io/pypa/manylinux2014_s390x
             image: manylinux2014_s390x
             platforms: "linux/s390x"
