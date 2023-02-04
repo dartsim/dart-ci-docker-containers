@@ -23,8 +23,9 @@ RUN yay -Syu --needed --noconfirm \
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
     python3 \
-    python-numpy \
-    python-pytest \
+    python-pip \
     pybind11
+RUN pip install --upgrade pip
+RUN pip install numpy pytest setuptools
 
 USER root
