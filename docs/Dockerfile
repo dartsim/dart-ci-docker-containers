@@ -1,3 +1,4 @@
+ARG TARGETPLATFORM
 FROM --platform=$TARGETPLATFORM ubuntu:bionic
 
 ARG DEBIAN_FRONTEND=noninteractive

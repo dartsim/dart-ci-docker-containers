@@ -1,3 +1,4 @@
+ARG TARGETPLATFORM
 FROM --platform=$TARGETPLATFORM fedora:latest
 
 RUN dnf makecache -y --refresh

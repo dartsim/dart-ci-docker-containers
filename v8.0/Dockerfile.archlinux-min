@@ -1,3 +1,4 @@
+ARG TARGETPLATFORM
 FROM --platform=$TARGETPLATFORM archlinux:latest
 
 #===============================================================================
