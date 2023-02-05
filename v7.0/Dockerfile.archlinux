@@ -1,7 +1,5 @@
 FROM --platform=$TARGETPLATFORM dartsim/dart-dev:archlinux-min-v7.0
 
-USER builder
-
 # ==============================================================================
 # DART optional dependencies
 # ==============================================================================
@@ -25,7 +23,6 @@ RUN yay -Syu --needed --noconfirm \
     python3 \
     python-pip \
     pybind11
+
 RUN pip install --upgrade pip
 RUN pip install numpy pytest requests setuptools -U
-
-USER root

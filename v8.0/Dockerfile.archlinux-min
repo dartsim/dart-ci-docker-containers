@@ -19,6 +19,7 @@ RUN git clone https://aur.archlinux.org/yay.git --single-branch --depth 1 \
     && makepkg -si --noconfirm \
     && cd .. \
     && rm -rf .cache yay
+USER root
 
 #===============================================================================
 # Build tools
@@ -34,5 +35,3 @@ RUN yay -Syu --needed --noconfirm \
 # ==============================================================================
 RUN yay -Syu --needed --noconfirm \
     assimp eigen fcl fmt glew glfw libccd
-
-USER root
