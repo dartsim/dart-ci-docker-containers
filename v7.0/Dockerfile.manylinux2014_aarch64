@@ -51,47 +51,47 @@ RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
     && cmake --build fcl/build --target install -j14 \
     && rm -rf fcl
 
-# # tinyxml
-# # RUN wget https://sourceforge.net/projects/tinyxml/files/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz \
-# #     && tar -xzf tinyxml_2_6_2.tar.gz \
-# #     && cd tinyxml \
-# #     && make \
-# #     && make install \
-# #     && cd .. \
-# #     && rm -rf tinyxml
-# RUN git clone https://github.com/jslee02/tinyxml.git \
-#     && mkdir -p tinyxml/build \
-#     && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build tinyxml/build --target install -j14 \
+# tinyxml
+# RUN wget https://sourceforge.net/projects/tinyxml/files/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz \
+#     && tar -xzf tinyxml_2_6_2.tar.gz \
+#     && cd tinyxml \
+#     && make \
+#     && make install \
+#     && cd .. \
 #     && rm -rf tinyxml
+RUN git clone https://github.com/jslee02/tinyxml.git \
+    && mkdir -p tinyxml/build \
+    && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build tinyxml/build --target install -j14 \
+    && rm -rf tinyxml
 
-# # tinyxml2
-# RUN git clone https://github.com/leethomason/tinyxml2.git -b '9.0.0' \
-#     && mkdir -p tinyxml2/build \
-#     && cmake tinyxml2 -B tinyxml2/build -DCMAKE_BUILD_TYPE=Release -Dtinyxml2_BUILD_TESTING=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-#     && cmake --build tinyxml2/build --target install -j14 \
-#     && rm -rf tinyxml2
+# tinyxml2
+RUN git clone https://github.com/leethomason/tinyxml2.git -b '9.0.0' \
+    && mkdir -p tinyxml2/build \
+    && cmake tinyxml2 -B tinyxml2/build -DCMAKE_BUILD_TYPE=Release -Dtinyxml2_BUILD_TESTING=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    && cmake --build tinyxml2/build --target install -j14 \
+    && rm -rf tinyxml2
 
-# # console_bridge
-# RUN git clone https://github.com/ros/console_bridge.git -b 1.0.2 \
-#     && mkdir -p console_bridge/build \
-#     && cmake console_bridge -B console_bridge/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build console_bridge/build --target install -j14 \
-#     && rm -rf console_bridge
+# console_bridge
+RUN git clone https://github.com/ros/console_bridge.git -b 1.0.2 \
+    && mkdir -p console_bridge/build \
+    && cmake console_bridge -B console_bridge/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build console_bridge/build --target install -j14 \
+    && rm -rf console_bridge
 
-# # urdfdom_headers
-# RUN git clone https://github.com/ros/urdfdom_headers.git -b 1.0.5 \
-#     && mkdir -p urdfdom_headers/build \
-#     && cmake urdfdom_headers -B urdfdom_headers/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build urdfdom_headers/build --target install -j14 \
-#     && rm -rf urdfdom_headers
+# urdfdom_headers
+RUN git clone https://github.com/ros/urdfdom_headers.git -b 1.0.5 \
+    && mkdir -p urdfdom_headers/build \
+    && cmake urdfdom_headers -B urdfdom_headers/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build urdfdom_headers/build --target install -j14 \
+    && rm -rf urdfdom_headers
 
-# # urdfdom
-# RUN git clone https://github.com/ros/urdfdom.git -b 3.0.0 \
-#     && mkdir -p urdfdom/build \
-#     && cmake urdfdom -B urdfdom/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build urdfdom/build --target install -j14 \
-#     && rm -rf urdfdom
+# urdfdom
+RUN git clone https://github.com/ros/urdfdom.git -b 3.0.0 \
+    && mkdir -p urdfdom/build \
+    && cmake urdfdom -B urdfdom/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build urdfdom/build --target install -j14 \
+    && rm -rf urdfdom
 
 # # openscenegraph
 # RUN git clone https://github.com/openscenegraph/OpenSceneGraph.git \
