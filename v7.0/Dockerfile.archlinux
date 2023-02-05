@@ -26,6 +26,6 @@ RUN yay -Syu --needed --noconfirm \
     python-pip \
     pybind11
 RUN pip install --upgrade pip
-RUN pip install distutils numpy pytest requests setuptools -U
+RUN pip install numpy pytest requests setuptools -U
 
 USER root
