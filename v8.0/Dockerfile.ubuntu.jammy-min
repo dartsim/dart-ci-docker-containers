@@ -1,4 +1,3 @@
-ARG TARGETPLATFORM
 FROM --platform=$TARGETPLATFORM ubuntu:jammy
 
 ARG DEBIAN_FRONTEND=noninteractive

@@ -1,4 +1,3 @@
-ARG TARGETPLATFORM
 FROM --platform=$TARGETPLATFORM dartsim/dart-dev:ubuntu-jammy-min-v7.0
 
 ARG DEBIAN_FRONTEND=noninteractive
