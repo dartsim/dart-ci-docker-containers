@@ -250,9 +250,9 @@ jobs:
             dart_version: v7.0
             experimental: true
 
-          - dockerfile: Dockerfile.manylinux_2_28.brew
-            base_image: quay.io/pypa/manylinux_2_28_x86_64
-            image: manylinux_2_28_x86_64
+          - dockerfile: Dockerfile.manylinux_2_28_aarch64
+            base_image: quay.io/pypa/manylinux_2_28_aarch64
+            image: manylinux_2_28_aarch64
             platforms: "linux/amd64"
             dart_version: v7.0
             experimental: false
