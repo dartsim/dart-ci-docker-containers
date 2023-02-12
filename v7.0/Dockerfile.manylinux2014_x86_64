@@ -5,6 +5,7 @@ RUN yum install -y \
     boost-devel \
     bullet-devel \
     coin-or-Ipopt-devel \
+    doxygen \
     fmt-devel \
     freeglut-devel \
     glew-devel \
