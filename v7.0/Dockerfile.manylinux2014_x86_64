@@ -1,7 +1,17 @@
 ARG BASE_IMAGE=quay.io/pypa/manylinux2014_x86_64
 FROM $BASE_IMAGE
 
-RUN yum install -y fmt-devel freeglut-devel glew-devel libccd-devel boost-devel bullet-devel coin-or-Ipopt-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
+RUN yum install -y \
+    boost-devel \
+    bullet-devel \
+    coin-or-Ipopt-devel \
+    fmt-devel \
+    freeglut-devel \
+    glew-devel \
+    libccd-devel \
+    python3-devel \
+    spdlog-devel \
+    tinyxml-devel
 
 # assimp
 RUN git clone https://github.com/assimp/assimp.git -b 'v5.2.5' \
