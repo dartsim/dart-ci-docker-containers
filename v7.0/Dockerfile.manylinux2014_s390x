@@ -32,7 +32,7 @@ RUN git clone https://gitlab.com/libeigen/eigen.git -b '3.4.0' \
 # octomap
 RUN git clone https://github.com/OctoMap/octomap.git -b 'v1.9.6' \
     && mkdir -p octomap/build \
-    && cmake octomap -B octomap/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OCTOVIS_SUBPROJECT=OFF -DBUILD_OCTOVIS_SUBPROJECT=OFF -DBUILD_DYNAMICETD3D_SUBPROJECT=OFF \
+    && cmake octomap -B octomap/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OCTOVIS_SUBPROJECT=OFF -DBUILD_OCTOVIS_SUBPROJECT=OFF -DBUILD_DYNAMICETD3D_SUBPROJECT=OFF -DBUILD_TESTING=OFF \
     && cmake --build octomap/build --target install -j${NUM_CORES} \
     && rm -rf octomap
 
@@ -72,11 +72,11 @@ RUN git clone https://github.com/ros/urdfdom.git -b 3.0.0 \
     && rm -rf urdfdom
 
 # openscenegraph
-# RUN git clone https://github.com/openscenegraph/OpenSceneGraph.git \
-#     && mkdir -p OpenSceneGraph/build \
-#     && cmake OpenSceneGraph -B OpenSceneGraph/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OSG_APPLICATIONS=OFF \
-#     && cmake --build OpenSceneGraph/build --target install -j${NUM_CORES} \
-#     && rm -rf OpenSceneGraph
+RUN git clone https://github.com/openscenegraph/OpenSceneGraph.git \
+    && mkdir -p OpenSceneGraph/build \
+    && cmake OpenSceneGraph -B OpenSceneGraph/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OSG_APPLICATIONS=OFF \
+    && cmake --build OpenSceneGraph/build --target install -j${NUM_CORES} \
+    && rm -rf OpenSceneGraph
 
 # pybind11
 RUN git clone https://github.com/pybind/pybind11.git -b 'v2.10.3' \
