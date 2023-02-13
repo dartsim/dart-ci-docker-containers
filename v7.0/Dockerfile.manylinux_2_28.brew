@@ -1,6 +1,8 @@
 ARG BASE_IMAGE=quay.io/pypa/manylinux_2_28_x86_64
 FROM $BASE_IMAGE
 
+ARG NUM_CORES=14
+
 # Install essential dev tools
 RUN yum groupinstall -y 'Development Tools'
 
