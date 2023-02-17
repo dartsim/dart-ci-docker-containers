@@ -12,7 +12,7 @@ RUN yay -Syu --needed --noconfirm \
     nlopt \
     octomap \
     ode \
-    opencl-clhpp-headers \
+    opencl-clhpp \
     opencl-headers \
     opencl-icd-loader \
     openscenegraph \
