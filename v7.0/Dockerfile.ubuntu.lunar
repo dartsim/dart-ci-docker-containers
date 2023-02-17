@@ -26,8 +26,10 @@ RUN apt-get install -y --no-install-recommends \
     liboctomap-dev \
     libode-dev \
     libspdlog-dev \
+    libyaml-cpp-dev \
     ocl-icd-opencl-dev \
-    libyaml-cpp-dev
+    opencl-headers \
+    opencl-clhpp-headers
 
 # pagmo2
 RUN apt-get install -y --no-install-recommends \
