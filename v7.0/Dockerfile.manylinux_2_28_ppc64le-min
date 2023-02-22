@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=quay.io/pypa/manylinux_2_28_aarch64
+ARG BASE_IMAGE=quay.io/pypa/manylinux_2_28_ppc64le
 FROM $BASE_IMAGE
 
 ARG NUM_CORES=14
@@ -54,13 +54,6 @@ RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
     && rm -rf fcl
 
 # tinyxml
-# RUN wget https://sourceforge.net/projects/tinyxml/files/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz \
-#     && tar -xzf tinyxml_2_6_2.tar.gz \
-#     && cd tinyxml \
-#     && make \
-#     && make install \
-#     && cd .. \
-#     && rm -rf tinyxml
 RUN git clone https://github.com/jslee02/tinyxml.git \
     && mkdir -p tinyxml/build \
     && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \

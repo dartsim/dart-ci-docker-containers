@@ -1,14 +1,20 @@
-ARG BASE_IMAGE=quay.io/pypa/manylinux_2_28_x86_64
+ARG BASE_IMAGE=quay.io/pypa/manylinux2014_ppc64le
 FROM $BASE_IMAGE
 
 ARG NUM_CORES=14
 
-RUN dnf install -y boost-devel eigen3-devel glew-devel python3-devel
+# Missing optional dependencies:
+#   bullet
+#   ipopt
+#   nlopt
+#   spdlog
+
+RUN yum install -y glew-devel boost-devel python3-devel
 
 # fmt
 RUN git clone https://github.com/fmtlib/fmt.git -b 9.1.0 \
     && mkdir -p fmt/build \
-    && cmake fmt -B fmt/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake fmt -B fmt/build -DCMAKE_BUILD_TYPE=Release -DFMT_TEST=OFF \
     && cmake --build fmt/build --target install -j${NUM_CORES} \
     && rm -rf fmt
 
@@ -48,18 +54,11 @@ RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
     && rm -rf fcl
 
 # tinyxml
-# RUN wget https://sourceforge.net/projects/tinyxml/files/tinyxml/2.6.2/tinyxml_2_6_2.tar.gz \
-#     && tar -xzf tinyxml_2_6_2.tar.gz \
-#     && cd tinyxml \
-#     && make \
-#     && make install \
-#     && cd .. \
-#     && rm -rf tinyxml
-RUN git clone https://github.com/xbmc/TinyXML.git \
-    && mkdir -p TinyXML/build \
-    && cmake TinyXML -B TinyXML/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-    && cmake --build TinyXML/build --target install -j${NUM_CORES} \
-    && rm -rf TinyXML
+RUN git clone https://github.com/jslee02/tinyxml.git \
+    && mkdir -p tinyxml/build \
+    && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build tinyxml/build --target install -j${NUM_CORES} \
+    && rm -rf tinyxml
 
 # tinyxml2
 RUN git clone https://github.com/leethomason/tinyxml2.git -b '9.0.0' \
@@ -75,29 +74,22 @@ RUN git clone https://github.com/ros/console_bridge.git -b 1.0.2 \
     && cmake --build console_bridge/build --target install -j${NUM_CORES} \
     && rm -rf console_bridge
 
-# # urdfdom_headers
-# RUN git clone https://github.com/ros/urdfdom_headers.git -b 1.0.5 \
-#     && mkdir -p urdfdom_headers/build \
-#     && cmake urdfdom_headers -B urdfdom_headers/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build urdfdom_headers/build --target install -j${NUM_CORES} \
-#     && rm -rf urdfdom_headers
+# urdfdom_headers
+RUN git clone https://github.com/ros/urdfdom_headers.git -b 1.0.5 \
+    && mkdir -p urdfdom_headers/build \
+    && cmake urdfdom_headers -B urdfdom_headers/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build urdfdom_headers/build --target install -j${NUM_CORES} \
+    && rm -rf urdfdom_headers
 
-# # urdfdom
-# RUN git clone https://github.com/ros/urdfdom.git -b 3.0.0 \
-#     && mkdir -p urdfdom/build \
-#     && cmake urdfdom -B urdfdom/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
-#     && cmake --build urdfdom/build --target install -j${NUM_CORES} \
-#     && rm -rf urdfdom
-
-# # openscenegraph
-# RUN git clone https://github.com/openscenegraph/OpenSceneGraph.git \
-#     && mkdir -p OpenSceneGraph/build \
-#     && cmake OpenSceneGraph -B OpenSceneGraph/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OSG_APPLICATIONS=OFF \
-#     && cmake --build OpenSceneGraph/build --target install -j${NUM_CORES} \
-#     && rm -rf OpenSceneGraph
+# urdfdom
+RUN git clone https://github.com/ros/urdfdom.git -b 3.0.0 \
+    && mkdir -p urdfdom/build \
+    && cmake urdfdom -B urdfdom/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build urdfdom/build --target install -j${NUM_CORES} \
+    && rm -rf urdfdom
 
 # pybind11
-RUN git clone https://github.com/pybind/pybind11.git -b 'v2.8.1' \
+RUN git clone https://github.com/pybind/pybind11.git -b 'v2.10.3' \
     && mkdir -p pybind11/build \
     && cmake pybind11 -B pybind11/build -DCMAKE_BUILD_TYPE=Release -DPYBIND11_TEST=OFF \
     && cmake --build pybind11/build --target install -j${NUM_CORES} \
