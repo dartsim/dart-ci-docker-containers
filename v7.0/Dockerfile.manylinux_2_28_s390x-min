@@ -4,7 +4,6 @@ FROM $BASE_IMAGE
 ARG NUM_CORES=14
 
 # Missing optional dependencies:
-#   bullet
 #   ipopt
 #   nlopt
 #   spdlog
