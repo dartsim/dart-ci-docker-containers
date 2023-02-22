@@ -225,7 +225,7 @@ jobs:
         dockerfile: [Dockerfile.manylinux2014_aarch64-min]
         base_image: [quay.io/pypa/manylinux2014_aarch64]
         image: [manylinux2014_aarch64-min]
-        platforms: ["linux/arm64"]
+        platforms: ["qemu-aarch64"]
         dart_version: [v7.0]
         experimental: [true]
         include:
@@ -308,7 +308,7 @@ jobs:
           - dockerfile: Dockerfile.manylinux2014_aarch64
             base_image: dartsim/dart-dev:manylinux2014_aarch64-min-v7.0
             image: manylinux2014_aarch64
-            platforms: "linux/arm64"
+            platforms: "qemu-aarch64"
             dart_version: v7.0
             experimental: true
 
