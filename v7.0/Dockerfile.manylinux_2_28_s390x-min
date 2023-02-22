@@ -4,9 +4,12 @@ FROM $BASE_IMAGE
 ARG NUM_CORES=14
 
 # Missing optional dependencies:
+#   bullet
 #   ipopt
+#   nlopt
+#   spdlog
 
-RUN yum install -y glew-devel libccd-devel boost-devel bullet-devel nlopt-devel spdlog-devel tinyxml-devel python3-devel
+RUN yum install -y glew-devel boost-devel python3-devel
 
 # fmt
 RUN git clone https://github.com/fmtlib/fmt.git -b 9.1.0 \
@@ -36,12 +39,26 @@ RUN git clone https://github.com/OctoMap/octomap.git -b 'v1.9.6' \
     && cmake --build octomap/build --target install -j${NUM_CORES} \
     && rm -rf octomap
 
+# libccd
+RUN git clone https://github.com/danfis/libccd.git -b 'v2.1' \
+    && mkdir -p libccd/build \
+    && cmake libccd -B libccd/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build libccd/build --target install -j${NUM_CORES} \
+    && rm -rf libccd
+
 # fcl
 RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
     && mkdir -p fcl/build \
     && cmake fcl -B fcl/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
     && cmake --build fcl/build --target install -j${NUM_CORES} \
     && rm -rf fcl
+
+# tinyxml
+RUN git clone https://github.com/jslee02/tinyxml.git \
+    && mkdir -p tinyxml/build \
+    && cmake tinyxml -B tinyxml/build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF \
+    && cmake --build tinyxml/build --target install -j${NUM_CORES} \
+    && rm -rf tinyxml
 
 # tinyxml2
 RUN git clone https://github.com/leethomason/tinyxml2.git -b '9.0.0' \

@@ -216,7 +216,7 @@ jobs:
 
   # Manylinux min
   manylinux_min:
-    name: manylinux
+    name: manylinux (min)
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
     strategy:
