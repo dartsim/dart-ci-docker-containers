@@ -235,7 +235,7 @@ jobs:
             image: manylinux2014_aarch64
             platforms: "linux/arm64"
             dart_version: v7.0
-            build_min: false
+            build_min: true
             experimental: true
 
           - dockerfile: Dockerfile.manylinux2014_ppc64le
@@ -259,7 +259,7 @@ jobs:
             image: manylinux_2_28_aarch64
             platforms: "linux/amd64"
             dart_version: v7.0
-            build_min: true
+            build_min: false
             experimental: false
 
           - dockerfile: Dockerfile.manylinux_2_28
