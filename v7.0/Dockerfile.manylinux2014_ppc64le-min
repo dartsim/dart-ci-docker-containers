@@ -52,6 +52,13 @@ RUN git clone https://github.com/flexible-collision-library/fcl.git -b '0.7.0' \
     && cmake --build fcl/build --target install -j${NUM_CORES} \
     && rm -rf fcl
 
+# Bullet
+RUN git clone https://github.com/bulletphysics/bullet3.git -b 3.25 \
+    && mkdir -p bullet3/build \
+    && cmake bullet3 -B bullet3/build -DCMAKE_BUILD_TYPE=Release -DBUILD_UNIT_TESTS=OFF -DBUILD_CPU_DEMOS=OFF \
+    && cmake --build bullet3/build --target install -j${NUM_CORES} \
+    && rm -rf bullet3
+
 # tinyxml
 RUN git clone https://github.com/jslee02/tinyxml.git \
     && mkdir -p tinyxml/build \
