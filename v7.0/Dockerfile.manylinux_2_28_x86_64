@@ -111,6 +111,9 @@ RUN git clone https://github.com/bulletphysics/bullet3.git -b 3.25 \
 # openscenegraph
 RUN git clone https://github.com/openscenegraph/OpenSceneGraph.git \
     && mkdir -p OpenSceneGraph/build \
-    && cmake OpenSceneGraph -B OpenSceneGraph/build -DCMAKE_BUILD_TYPE=Release -DBUILD_OSG_APPLICATIONS=OFF \
+    && cmake OpenSceneGraph -B OpenSceneGraph/build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_OSG_APPLICATIONS=OFF \
+    -DBUILD_OSG_DEPRECATED_SERIALIZERS=OFF \
     && cmake --build OpenSceneGraph/build --target install -j${NUM_CORES} \
     && rm -rf OpenSceneGraph
