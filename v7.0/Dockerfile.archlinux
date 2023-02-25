@@ -17,7 +17,7 @@ RUN yay -Syu --needed --noconfirm \
     opencl-icd-loader \
     openscenegraph \
     pagmo \
-    # spdlog \
+    spdlog \
     tinyxml2 \
     urdfdom
 
