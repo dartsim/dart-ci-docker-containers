@@ -14,7 +14,7 @@ on:
     - cron: "0 2 * * FRI"
 
 env:
-  DOCKER_REPO: dartsim/dart-dev # https://hub.docker.com/repository/docker/dartsim/dart-dev
+  DOCKER_REPO: jslee02/dart-dev # https://hub.docker.com/repository/docker/jslee02/dart-dev
 
 jobs:
   ubuntu:
@@ -306,21 +306,21 @@ jobs:
         experimental: [false]
         include:
           - dockerfile: Dockerfile.manylinux2014_aarch64
-            base_image: dartsim/dart-dev:manylinux2014_aarch64-min-v7.0
+            base_image: jslee02/dart-dev:manylinux2014_aarch64-min-v7.0
             image: manylinux2014_aarch64
             platforms: "linux/arm64"
             dart_version: v7.0
             experimental: true
 
           - dockerfile: Dockerfile.manylinux2014_ppc64le
-            base_image: dartsim/dart-dev:manylinux2014_ppc64le-min-v7.0
+            base_image: jslee02/dart-dev:manylinux2014_ppc64le-min-v7.0
             image: manylinux2014_ppc64le
             platforms: "linux/ppc64le"
             dart_version: v7.0
             experimental: true
 
           - dockerfile: Dockerfile.manylinux2014_s390x
-            base_image: dartsim/dart-dev:manylinux2014_s390x-min-v7.0
+            base_image: jslee02/dart-dev:manylinux2014_s390x-min-v7.0
             image: manylinux2014_s390x
             platforms: "linux/s390x"
             dart_version: v7.0
@@ -334,21 +334,21 @@ jobs:
             experimental: false
 
           - dockerfile: Dockerfile.manylinux_2_28_aarch64
-            base_image: dartsim/dart-dev:manylinux_2_28_aarch64-min-v7.0
+            base_image: jslee02/dart-dev:manylinux_2_28_aarch64-min-v7.0
             image: manylinux_2_28_aarch64
             platforms: "linux/arm64"
             dart_version: v7.0
             experimental: true
 
           - dockerfile: Dockerfile.manylinux_2_28_ppc64le
-            base_image: dartsim/dart-dev:manylinux_2_28_ppc64le-min-v7.0
+            base_image: jslee02/dart-dev:manylinux_2_28_ppc64le-min-v7.0
             image: manylinux_2_28_ppc64le
             platforms: "linux/ppc64le"
             dart_version: v7.0
             experimental: true
 
           - dockerfile: Dockerfile.manylinux_2_28_s390x
-            base_image: dartsim/dart-dev:manylinux_2_28_s390x-min-v7.0
+            base_image: jslee02/dart-dev:manylinux_2_28_s390x-min-v7.0
             image: manylinux_2_28_s390x
             platforms: "linux/s390x"
             dart_version: v7.0

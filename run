@@ -14,7 +14,7 @@ help() {
     echo
 }
 
-image_name=dartsim/dart-dev
+image_name=jslee02/dart-dev
 dart_version=v8.0
 
 push_to_dockerhub=false

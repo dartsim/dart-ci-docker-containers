@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=dartsim/dart-dev:manylinux2014_s390x-min-v7.0
+ARG BASE_IMAGE=jslee02/dart-dev:manylinux2014_s390x-min-v7.0
 FROM $BASE_IMAGE
 
 ARG NUM_CORES=14
