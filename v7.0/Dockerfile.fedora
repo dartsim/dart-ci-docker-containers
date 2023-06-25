@@ -1,5 +1,5 @@
 ARG TARGETPLATFORM=linux/amd64
-FROM --platform=$TARGETPLATFORM jslee02/dart-dev:fedora-min-v8.0
+FROM --platform=$TARGETPLATFORM jslee02/dart-dev:fedora-min-v7.0
 
 # Use /bin/bash to use pushd/popd
 SHELL ["/bin/bash", "-c"]
