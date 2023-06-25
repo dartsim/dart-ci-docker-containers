@@ -32,10 +32,6 @@ jobs:
             build_min: ON
             dart_version: v7.0
             platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
-          - distro: kinetic
-            build_min: ON
-            dart_version: v7.0
-            platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
           - distro: lunar
             build_min: ON
             dart_version: v7.0
@@ -48,7 +44,7 @@ jobs:
           #   build_min: OFF
           #   dart_version: v8.0
           #   platforms: linux/amd64,linux/arm64
-          # - distro: kinetic
+          # - distro: lunar
           #   build_min: ON
           #   dart_version: v8.0
           #   platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x

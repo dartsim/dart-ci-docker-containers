@@ -1,5 +1,5 @@
 ARG TARGETPLATFORM=linux/amd64
-FROM --platform=$TARGETPLATFORM jslee02/dart-dev:ubuntu-kinetic-min-v8.0
+FROM --platform=$TARGETPLATFORM jslee02/dart-dev:ubuntu-lunar-min-v8.0
 
 ARG DEBIAN_FRONTEND=noninteractive
 
