@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         distro: [focal, jammy]
-        dart_version: [v6.13]
+        dart_version: [v6.13, v6.14]
         platforms: ["linux/amd64,linux/arm64,linux/ppc64le,linux/s390x"]
         build_min: [OFF]
         include:
