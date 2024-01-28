@@ -93,9 +93,8 @@ RUN apt-get install -y --no-install-recommends \
     python3-distutils \
     python3-numpy \
     python3-pip \
+    python3-pytest \
     python3-setuptools
-
-RUN pip3 install pytest -U
 
 # ==============================================================================
 # Clean up
